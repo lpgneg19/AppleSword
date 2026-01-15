@@ -1,0 +1,58 @@
+name: AppleSword
+options:
+  bundleIdPrefix: app.applesword.native
+  indentWidth: 4
+  tabWidth: 4
+
+packages:
+  Aria2Kit:
+    url: https://github.com/baptistecdr/Aria2Kit
+    from: 1.0.0
+  AnyCodable:
+    url: https://github.com/Flight-School/AnyCodable
+    from: 0.6.7
+  Alamofire:
+    url: https://github.com/Alamofire/Alamofire
+    from: 5.8.1
+
+targets:
+  AppleSword:
+    type: application
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: AppleSword
+      - path: extra/darwin/arm64/engine/aria2c
+        type: file
+        buildPhase: resources
+      - path: extra/darwin/arm64/engine/aria2.conf
+        type: file
+        buildPhase: resources
+    settings:
+      base:
+        INFOPLIST_FILE: AppleSword/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: app.applesword.native
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ENABLE_HARDENED_RUNTIME: YES
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+    dependencies:
+      - package: Aria2Kit
+      - package: AnyCodable
+      - package: Alamofire
+      - target: AppleSword Extension
+
+  AppleSword Extension:
+    type: app-extension
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: AppleSwordExtension
+    settings:
+      base:
+        INFOPLIST_FILE: AppleSwordExtension/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: app.applesword.native.extension
+        GENERATE_INFOPLIST_FILE: NO
+        ENABLE_HARDENED_RUNTIME: YES
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""

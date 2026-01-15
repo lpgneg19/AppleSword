@@ -1,0 +1,10 @@
+{
+    "manifest_version": 3,
+    "name": "AppleSword Extension",
+    "version": "0.1",
+    "description": "Send downloads to AppleSword",
+    "permissions": ["contextMenus", "tabs"],
+    "background": {
+        "service_worker": "js/background.js"
+    }
+}

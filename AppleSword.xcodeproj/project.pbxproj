@@ -1,0 +1,652 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		140D6D3948E6A4EACEC16A61 /* MenuBarExtra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B30480B606E74553F42CE83 /* MenuBarExtra.swift */; };
+		1B94D1C06A4E5E3B06546E73 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7C6BEC3825CB6F51F533FB /* Formatters.swift */; };
+		32AC45BB05123AF31D23B8EA /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A7A20B0317E184B60FBCC8 /* SafariWebExtensionHandler.swift */; };
+		364D6485D48E1C8F8B80B338 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ED10B4091AA87DB306834EE8 /* InfoPlist.xcstrings */; };
+		4E384CDB8C27E4BE6A95F557 /* AnyCodable in Frameworks */ = {isa = PBXBuildFile; productRef = 410082DF69BD61BAFA6D73A3 /* AnyCodable */; };
+		5A0E7CAC997CCA2669EE835F /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 4B804D36471D70F07E736392 /* background.js */; };
+		62E43D3590FB71EAC37B1AA1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 017DC3696A5C4C880C3C2703 /* Alamofire */; };
+		66310D98BBAA5A34EF4A70AA /* DownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD48F7DED605963F5F07478 /* DownloadTask.swift */; };
+		6E9EC839E284D7E031D41B54 /* Aria2Kit in Frameworks */ = {isa = PBXBuildFile; productRef = 28B00BBE35FA9506D47C9978 /* Aria2Kit */; };
+		721A411945B22E914F8681DA /* aria2.conf in Resources */ = {isa = PBXBuildFile; fileRef = B40912E044D39634398B6BEA /* aria2.conf */; };
+		7803C569732BD219FD500769 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21CB08553892309398491BC /* TaskListView.swift */; };
+		7F327D588E44077817354D54 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B6936E06D217C3F0FF55DBAC /* manifest.json */; };
+		8B2E8E9ED448720D4B63025D /* TorrentConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C933013D71C1B46580BB8D /* TorrentConfirmView.swift */; };
+		8D22593B876EAE4EE72E8112 /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B1BF41CE6475A36518450 /* TaskDetailView.swift */; };
+		93F047C344EA23C31D52BBF9 /* AppleSword Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3C89634D9F20F0F35932E7C1 /* AppleSword Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A70AB08B5B9CA55FB2CABEB5 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3E494120ECBF5622EE724 /* TaskStore.swift */; };
+		AD5CFBBF0A386824E686E1A3 /* EngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E838F28DF194A191B0D9246 /* EngineManager.swift */; };
+		AE147784BA63D3CF42F4BF76 /* aria2c in Resources */ = {isa = PBXBuildFile; fileRef = 78BC63C8799340B67CF13116 /* aria2c */; };
+		B097FFD1797D37E55B286584 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6CD6FB63DB532A483B6194 /* SettingsStore.swift */; };
+		B917196FDF6D88E20189A8E8 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 277F78238BF09F009C9F8D3D /* Localizable.xcstrings */; };
+		C36C40FF426E41FF9E320593 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D9ADF44E5054293C6BBAB1 /* SettingsView.swift */; };
+		D47228F3453F0FA1CEA2B125 /* AppleSwordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0201F73DB1B50276002B8B30 /* AppleSwordApp.swift */; };
+		D56E4FA386FDE78E48638FC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ABC6FED8868CBFDD0F13A5D /* Assets.xcassets */; };
+		DBD7B078CEAE7BEF3166F11F /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6740F166044F6BBE1C815B /* AddTaskView.swift */; };
+		EBAA04FD6B7DFF3B76EDD23C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E31963515A3EE5B1FD1AABB /* MainView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B1AFA483CCA875AE1C595EE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 60519C5670D4E1F61E1E8530 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62B35491AACC835D073E3C9D;
+			remoteInfo = "AppleSword Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BD70D5585DC5DDD94E083082 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				93F047C344EA23C31D52BBF9 /* AppleSword Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0201F73DB1B50276002B8B30 /* AppleSwordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSwordApp.swift; sourceTree = "<group>"; };
+		0E31963515A3EE5B1FD1AABB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		11C933013D71C1B46580BB8D /* TorrentConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentConfirmView.swift; sourceTree = "<group>"; };
+		1ABC6FED8868CBFDD0F13A5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		277F78238BF09F009C9F8D3D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		27FA836E9E9AEDD3CAD53FFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2A7C6BEC3825CB6F51F533FB /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		2B30480B606E74553F42CE83 /* MenuBarExtra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarExtra.swift; sourceTree = "<group>"; };
+		3C89634D9F20F0F35932E7C1 /* AppleSword Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "AppleSword Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		428984D31403BB8387E9C11A /* AppleSword.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleSword.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		48D3E494120ECBF5622EE724 /* TaskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
+		4AD48F7DED605963F5F07478 /* DownloadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadTask.swift; sourceTree = "<group>"; };
+		4B804D36471D70F07E736392 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
+		78BC63C8799340B67CF13116 /* aria2c */ = {isa = PBXFileReference; path = aria2c; sourceTree = "<group>"; };
+		7E838F28DF194A191B0D9246 /* EngineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineManager.swift; sourceTree = "<group>"; };
+		90D9ADF44E5054293C6BBAB1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA9B1BF41CE6475A36518450 /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
+		AF6740F166044F6BBE1C815B /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
+		B40912E044D39634398B6BEA /* aria2.conf */ = {isa = PBXFileReference; path = aria2.conf; sourceTree = "<group>"; };
+		B6936E06D217C3F0FF55DBAC /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		BB6CD6FB63DB532A483B6194 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		E502A8DEF45EEB2A114D6889 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E6A7A20B0317E184B60FBCC8 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		ED10B4091AA87DB306834EE8 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		F21CB08553892309398491BC /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2D5BDED5A64D3B8029753050 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E9EC839E284D7E031D41B54 /* Aria2Kit in Frameworks */,
+				4E384CDB8C27E4BE6A95F557 /* AnyCodable in Frameworks */,
+				62E43D3590FB71EAC37B1AA1 /* Alamofire in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19E8743B678FCB346D601E43 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2A7C6BEC3825CB6F51F533FB /* Formatters.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		1CD93B44DFF4242DC3CBBB15 /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				B40912E044D39634398B6BEA /* aria2.conf */,
+				78BC63C8799340B67CF13116 /* aria2c */,
+			);
+			name = engine;
+			path = extra/darwin/arm64/engine;
+			sourceTree = "<group>";
+		};
+		1FA8FEEA4694B26C66A452C3 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				4B804D36471D70F07E736392 /* background.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		29A161E53080ACFD5C752127 /* AppleSword */ = {
+			isa = PBXGroup;
+			children = (
+				0201F73DB1B50276002B8B30 /* AppleSwordApp.swift */,
+				1ABC6FED8868CBFDD0F13A5D /* Assets.xcassets */,
+				E502A8DEF45EEB2A114D6889 /* Info.plist */,
+				ED10B4091AA87DB306834EE8 /* InfoPlist.xcstrings */,
+				277F78238BF09F009C9F8D3D /* Localizable.xcstrings */,
+				615E6D455D3C6C700A309EE1 /* Core */,
+				E4CF1BE86B5DAC3CA3556FFC /* Models */,
+				CE74F38D2977880D63D83C2B /* Store */,
+				19E8743B678FCB346D601E43 /* Utils */,
+				AF62AD8F6C3AFC8CDA41E19F /* Views */,
+			);
+			path = AppleSword;
+			sourceTree = "<group>";
+		};
+		399D38A65AEF01D9E40E3486 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3C89634D9F20F0F35932E7C1 /* AppleSword Extension.appex */,
+				428984D31403BB8387E9C11A /* AppleSword.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		615E6D455D3C6C700A309EE1 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				7E838F28DF194A191B0D9246 /* EngineManager.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		AF62AD8F6C3AFC8CDA41E19F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AF6740F166044F6BBE1C815B /* AddTaskView.swift */,
+				0E31963515A3EE5B1FD1AABB /* MainView.swift */,
+				2B30480B606E74553F42CE83 /* MenuBarExtra.swift */,
+				90D9ADF44E5054293C6BBAB1 /* SettingsView.swift */,
+				AA9B1BF41CE6475A36518450 /* TaskDetailView.swift */,
+				F21CB08553892309398491BC /* TaskListView.swift */,
+				11C933013D71C1B46580BB8D /* TorrentConfirmView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B8AEE5A3ADCD644979FCE6A8 /* AppleSwordExtension */ = {
+			isa = PBXGroup;
+			children = (
+				27FA836E9E9AEDD3CAD53FFA /* Info.plist */,
+				E6A7A20B0317E184B60FBCC8 /* SafariWebExtensionHandler.swift */,
+				EF4C30CF2EA3D825FA17C2C4 /* Resources */,
+			);
+			path = AppleSwordExtension;
+			sourceTree = "<group>";
+		};
+		CE74F38D2977880D63D83C2B /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				BB6CD6FB63DB532A483B6194 /* SettingsStore.swift */,
+				48D3E494120ECBF5622EE724 /* TaskStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		D5DA5D6645F6E387AD2045B3 = {
+			isa = PBXGroup;
+			children = (
+				29A161E53080ACFD5C752127 /* AppleSword */,
+				B8AEE5A3ADCD644979FCE6A8 /* AppleSwordExtension */,
+				1CD93B44DFF4242DC3CBBB15 /* engine */,
+				399D38A65AEF01D9E40E3486 /* Products */,
+			);
+			indentWidth = 4;
+			sourceTree = "<group>";
+			tabWidth = 4;
+		};
+		E4CF1BE86B5DAC3CA3556FFC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4AD48F7DED605963F5F07478 /* DownloadTask.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EF4C30CF2EA3D825FA17C2C4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B6936E06D217C3F0FF55DBAC /* manifest.json */,
+				1FA8FEEA4694B26C66A452C3 /* js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0176DC93ED52296191AFE731 /* AppleSword */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CCAAD7EB4D6C14BA6D18B8A /* Build configuration list for PBXNativeTarget "AppleSword" */;
+			buildPhases = (
+				37EEF57D94CA713851AE8599 /* Sources */,
+				48B29C6F310240E54A1F082E /* Resources */,
+				2D5BDED5A64D3B8029753050 /* Frameworks */,
+				BD70D5585DC5DDD94E083082 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D3E11E881472FE17060EF980 /* PBXTargetDependency */,
+			);
+			name = AppleSword;
+			packageProductDependencies = (
+				28B00BBE35FA9506D47C9978 /* Aria2Kit */,
+				410082DF69BD61BAFA6D73A3 /* AnyCodable */,
+				017DC3696A5C4C880C3C2703 /* Alamofire */,
+			);
+			productName = AppleSword;
+			productReference = 428984D31403BB8387E9C11A /* AppleSword.app */;
+			productType = "com.apple.product-type.application";
+		};
+		62B35491AACC835D073E3C9D /* AppleSword Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4FE94CA4B47564157265218A /* Build configuration list for PBXNativeTarget "AppleSword Extension" */;
+			buildPhases = (
+				0E985F53019744090612BD0E /* Sources */,
+				10EF2F7D33977AA19D54E5B7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AppleSword Extension";
+			packageProductDependencies = (
+			);
+			productName = "AppleSword Extension";
+			productReference = 3C89634D9F20F0F35932E7C1 /* AppleSword Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		60519C5670D4E1F61E1E8530 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					0176DC93ED52296191AFE731 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					62B35491AACC835D073E3C9D = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 8078269A91E4EE4002ADDA8D /* Build configuration list for PBXProject "AppleSword" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+				"zh-Hans",
+			);
+			mainGroup = D5DA5D6645F6E387AD2045B3;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A49BE712DD2AA4D085C27626 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				97D8F92314BEBA4528C46BF9 /* XCRemoteSwiftPackageReference "AnyCodable" */,
+				BA70C4BB5C0E8A960A5E947C /* XCRemoteSwiftPackageReference "Aria2Kit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0176DC93ED52296191AFE731 /* AppleSword */,
+				62B35491AACC835D073E3C9D /* AppleSword Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		10EF2F7D33977AA19D54E5B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A0E7CAC997CCA2669EE835F /* background.js in Resources */,
+				7F327D588E44077817354D54 /* manifest.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48B29C6F310240E54A1F082E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D56E4FA386FDE78E48638FC4 /* Assets.xcassets in Resources */,
+				364D6485D48E1C8F8B80B338 /* InfoPlist.xcstrings in Resources */,
+				B917196FDF6D88E20189A8E8 /* Localizable.xcstrings in Resources */,
+				721A411945B22E914F8681DA /* aria2.conf in Resources */,
+				AE147784BA63D3CF42F4BF76 /* aria2c in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0E985F53019744090612BD0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32AC45BB05123AF31D23B8EA /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EEF57D94CA713851AE8599 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBD7B078CEAE7BEF3166F11F /* AddTaskView.swift in Sources */,
+				D47228F3453F0FA1CEA2B125 /* AppleSwordApp.swift in Sources */,
+				66310D98BBAA5A34EF4A70AA /* DownloadTask.swift in Sources */,
+				AD5CFBBF0A386824E686E1A3 /* EngineManager.swift in Sources */,
+				1B94D1C06A4E5E3B06546E73 /* Formatters.swift in Sources */,
+				EBAA04FD6B7DFF3B76EDD23C /* MainView.swift in Sources */,
+				140D6D3948E6A4EACEC16A61 /* MenuBarExtra.swift in Sources */,
+				B097FFD1797D37E55B286584 /* SettingsStore.swift in Sources */,
+				C36C40FF426E41FF9E320593 /* SettingsView.swift in Sources */,
+				8D22593B876EAE4EE72E8112 /* TaskDetailView.swift in Sources */,
+				7803C569732BD219FD500769 /* TaskListView.swift in Sources */,
+				A70AB08B5B9CA55FB2CABEB5 /* TaskStore.swift in Sources */,
+				8B2E8E9ED448720D4B63025D /* TorrentConfirmView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D3E11E881472FE17060EF980 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62B35491AACC835D073E3C9D /* AppleSword Extension */;
+			targetProxy = B1AFA483CCA875AE1C595EE7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1E9556ADE4A8B5075F2DD675 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = AppleSword/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.applesword.native;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		26339B42BB15557715361F99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AppleSwordExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.applesword.native.extension;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		393C233E1765C81F80014B97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		4DD5A7D1CE73B5252ECF2060 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AppleSwordExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.applesword.native.extension;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		8BD4D13B9CF8520C848CD685 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F5C39BA1C5732C45FED10F3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = AppleSword/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.applesword.native;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1CCAAD7EB4D6C14BA6D18B8A /* Build configuration list for PBXNativeTarget "AppleSword" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5C39BA1C5732C45FED10F3F /* Debug */,
+				1E9556ADE4A8B5075F2DD675 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4FE94CA4B47564157265218A /* Build configuration list for PBXNativeTarget "AppleSword Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26339B42BB15557715361F99 /* Debug */,
+				4DD5A7D1CE73B5252ECF2060 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8078269A91E4EE4002ADDA8D /* Build configuration list for PBXProject "AppleSword" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BD4D13B9CF8520C848CD685 /* Debug */,
+				393C233E1765C81F80014B97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		97D8F92314BEBA4528C46BF9 /* XCRemoteSwiftPackageReference "AnyCodable" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Flight-School/AnyCodable";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.7;
+			};
+		};
+		A49BE712DD2AA4D085C27626 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
+		BA70C4BB5C0E8A960A5E947C /* XCRemoteSwiftPackageReference "Aria2Kit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/baptistecdr/Aria2Kit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		017DC3696A5C4C880C3C2703 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A49BE712DD2AA4D085C27626 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		28B00BBE35FA9506D47C9978 /* Aria2Kit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA70C4BB5C0E8A960A5E947C /* XCRemoteSwiftPackageReference "Aria2Kit" */;
+			productName = Aria2Kit;
+		};
+		410082DF69BD61BAFA6D73A3 /* AnyCodable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97D8F92314BEBA4528C46BF9 /* XCRemoteSwiftPackageReference "AnyCodable" */;
+			productName = AnyCodable;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 60519C5670D4E1F61E1E8530 /* Project object */;
+}

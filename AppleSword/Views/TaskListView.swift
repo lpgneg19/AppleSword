@@ -1,0 +1,154 @@
+import SwiftUI
+
+struct TaskListView: View {
+    let status: String
+    @Binding var selectedTaskGids: Set<String>
+    @Binding var isShowingAddTask: Bool
+    @EnvironmentObject var taskStore: TaskStore
+
+    var body: some View {
+        Group {
+            if taskStore.tasks.isEmpty {
+                ContentUnavailableView(
+                    "暂无任务",
+                    systemImage: "tray",
+                    description: Text("点击上方 '+' 按钮或拖入链接开始下载")
+                )
+            } else {
+                List(selection: $selectedTaskGids) {
+                    ForEach(taskStore.tasks) { task in
+                        TaskRow(task: task)
+                            .tag(task.gid)
+                            .contextMenu {
+                                Button {
+                                    if task.status == .active {
+                                        taskStore.pauseTasks(gids: [task.gid])
+                                    } else {
+                                        taskStore.resumeTasks(gids: [task.gid])
+                                    }
+                                } label: {
+                                    Label(
+                                        task.status == .active ? "暂停" : "开始",
+                                        systemImage: task.status == .active
+                                            ? "pause.fill" : "play.fill")
+                                }
+
+                                Button {
+                                    taskStore.stopTasks(gids: [task.gid])
+                                } label: {
+                                    Label("停止", systemImage: "stop.fill")
+                                }
+
+                                Divider()
+
+                                Button(role: .destructive) {
+                                    taskStore.removeTasks(gids: [task.gid])
+                                } label: {
+                                    Label("删除", systemImage: "trash.fill")
+                                }
+                            }
+                    }
+                }
+                .listStyle(.inset)
+            }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .primaryAction) {
+                Button(action: {
+                    if selectedTaskGids.count == taskStore.tasks.count && !taskStore.tasks.isEmpty {
+                        selectedTaskGids.removeAll()
+                    } else {
+                        selectedTaskGids = Set(taskStore.tasks.map { $0.gid })
+                    }
+                }) {
+                    Label(
+                        selectedTaskGids.count == taskStore.tasks.count && !taskStore.tasks.isEmpty
+                            ? "取消全选" : "全选",
+                        systemImage: selectedTaskGids.count == taskStore.tasks.count
+                            && !taskStore.tasks.isEmpty
+                            ? "checkmark.square.fill" : "checkmark.square"
+                    )
+                }
+                .help("全选 / 取消全选")
+
+                Button(action: { taskStore.resumeTasks(gids: selectedTaskGids) }) {
+                    Label("开始", systemImage: "play.fill")
+                }
+                .disabled(selectedTaskGids.isEmpty)
+                .help("开始任务")
+
+                Button(action: { taskStore.pauseTasks(gids: selectedTaskGids) }) {
+                    Label("暂停", systemImage: "pause.fill")
+                }
+                .disabled(selectedTaskGids.isEmpty)
+                .help("暂停任务")
+
+                Button(action: { taskStore.stopTasks(gids: selectedTaskGids) }) {
+                    Label("停止", systemImage: "stop.fill")
+                }
+                .disabled(selectedTaskGids.isEmpty)
+                .help("停止任务")
+
+                Button(action: {
+                    taskStore.removeTasks(gids: selectedTaskGids)
+                    selectedTaskGids.removeAll()
+                }) {
+                    Label("删除", systemImage: "trash.fill")
+                }
+                .disabled(selectedTaskGids.isEmpty)
+                .help("删除任务")
+
+                Button(action: { isShowingAddTask = true }) {
+                    Label("新建任务", systemImage: "plus")
+                }
+                .help("创建新下载任务")
+
+                Button(action: { taskStore.fetchTasks() }) {
+                    Label("刷新", systemImage: "arrow.clockwise")
+                }
+                .help("刷新列表")
+            }
+        }
+    }
+}
+
+struct TaskRow: View {
+    let task: DownloadTask
+
+    var body: some View {
+        HStack {
+            Image(systemName: task.bittorrent != nil ? "arrow.down.doc.fill" : "link.circle.fill")
+                .font(.title2)
+                .foregroundColor(.accentColor)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(
+                    task.bittorrent?.info?.name ?? task.files.first?.path.components(
+                        separatedBy: "/"
+                    ).last ?? "未知文件"
+                )
+                .font(.headline)
+                .lineLimit(1)
+
+                ProgressView(value: Double(task.completedLength), total: Double(task.totalLength))
+                    .progressViewStyle(.linear)
+
+                HStack {
+                    Text(formatBytes(task.completedLength) + " / " + formatBytes(task.totalLength))
+                    Spacer()
+                    Text(formatBytes(task.downloadSpeed) + "/s")
+                        .foregroundColor(.secondary)
+                }
+                .font(.caption)
+            }
+        }
+        .padding(.vertical, 4)
+    }
+
+    private func formatBytes(_ bytes: Int64) -> String {
+        let formatter = ByteCountFormatter()
+        formatter.allowedUnits = [.useAll]
+        formatter.countStyle = .file
+        return formatter.string(fromByteCount: bytes)
+    }
+}
