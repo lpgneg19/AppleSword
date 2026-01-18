@@ -48,11 +48,13 @@ class TaskStore: ObservableObject {
     }
 
     private func requestNotificationPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
-            success, error in
-            if success {
-                print("[TaskStore] Notification permission granted")
-            } else if let error = error {
+        Task {
+            do {
+                let granted = try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge])
+                if granted {
+                    print("[TaskStore] Notification permission granted")
+                }
+            } catch {
                 print("[TaskStore] Notification permission error: \(error.localizedDescription)")
             }
         }

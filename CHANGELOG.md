@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6] - 2026-01-18
+
+### Fixed
+- **启动崩溃**: 修复了由于通知权限申请回调在非主线程执行导致的 Main Actor 隔离冲突崩溃。
+
+### Changed
+- **版本更新**: 升级版本号至 0.6。
+
 ## [0.1] - 2026-01-15
 
 ### Fixed

@@ -1,0 +1,33 @@
+{
+  "originHash" : "6ac7739699ad479aa681c39a0d3637c3c0f77e96ecde59ace90d8e427611bbef",
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire",
+      "state" : {
+        "revision" : "7be73f6c2b5cd90e40798b06ebd5da8f9f79cf88",
+        "version" : "5.11.0"
+      }
+    },
+    {
+      "identity" : "anycodable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Flight-School/AnyCodable",
+      "state" : {
+        "revision" : "862808b2070cd908cb04f9aafe7de83d35f81b05",
+        "version" : "0.6.7"
+      }
+    },
+    {
+      "identity" : "aria2kit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/baptistecdr/Aria2Kit",
+      "state" : {
+        "revision" : "fef4c1eb3b93f349bf30c0a43564ca1b9a5b4b37",
+        "version" : "1.0.4"
+      }
+    }
+  ],
+  "version" : 3
+}
