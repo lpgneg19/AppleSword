@@ -21,6 +21,9 @@ struct MainView: View {
                     NavigationLink(value: "stopped") {
                         Label(LocalizedStringKey("已停止"), systemImage: "stop.circle")
                     }
+                    NavigationLink(value: "completed") {
+                        Label(LocalizedStringKey("已完成"), systemImage: "checkmark.circle")
+                    }
                 }
             }
             .listStyle(.sidebar)

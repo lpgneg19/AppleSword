@@ -59,7 +59,9 @@ class TaskStore: ObservableObject {
     }
 
     deinit {
-        EngineManager.shared.stop()
+        Task { @MainActor in
+            EngineManager.shared.stop()
+        }
     }
 
     func fetchTasks() {
@@ -240,8 +242,10 @@ class TaskStore: ObservableObject {
     func resumeTask(gid: String, options: [String: String] = [:]) {
         if !options.isEmpty {
             changeOption(gid: gid, options: options) { [weak self] in
-                self?.aria2.call(method: .unpause, params: [AnyEncodable(gid)]).response { _ in
-                    Task { @MainActor in self?.fetchTasks() }
+                Task { @MainActor in
+                    self?.aria2.call(method: .unpause, params: [AnyEncodable(gid)]).response { _ in
+                        Task { @MainActor in self?.fetchTasks() }
+                    }
                 }
             }
         } else {
@@ -251,7 +255,7 @@ class TaskStore: ObservableObject {
         }
     }
 
-    func changeOption(gid: String, options: [String: String], completion: @escaping () -> Void = {})
+    func changeOption(gid: String, options: [String: String], completion: @escaping @Sendable () -> Void = {})
     {
         aria2.call(method: .changeOption, params: [AnyEncodable(gid), AnyEncodable(options)])
             .response { _ in

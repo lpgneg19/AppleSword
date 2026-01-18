@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "zh-Hans",
   "strings" : {
+    "/" : {
+
+    },
+    "%@/s" : {
+
+    },
     "AppleSword" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -18,6 +24,49 @@
         }
       }
     },
+    "KB/s" : {
+
+    },
+    "下载状态" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download Status"
+          }
+        }
+      }
+    },
+    "下载路径" : {
+
+    },
+    "任务统计" : {
+
+    },
+    "任务详情" : {
+
+    },
+    "已停止" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stopped"
+          }
+        }
+      }
+    },
+    "引擎错误: %@" : {
+
+    },
+    "文件列表 (%@)" : {
+
+    },
+    "新建下载任务" : {
+
+    },
     "无活跃任务" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -25,17 +74,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No active tasks"
-          }
-        }
-      }
-    },
-    "未知任务" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unknown Task"
           }
         }
       }
@@ -51,24 +89,13 @@
         }
       }
     },
-    "退出" : {
+    "未知任务" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quit"
-          }
-        }
-      }
-    },
-    "正在连接引擎..." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connecting to engine..."
+            "value" : "Unknown Task"
           }
         }
       }
@@ -84,6 +111,26 @@
         }
       }
     },
+    "正在连接引擎..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connecting to engine..."
+          }
+        }
+      }
+    },
+    "每行输入一个 Tracker 地址" : {
+
+    },
+    "点击上方 '+' 按钮或拖入链接开始下载" : {
+
+    },
+    "确认下载种子" : {
+
+    },
     "等待下载" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -95,28 +142,6 @@
         }
       }
     },
-    "已停止" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stopped"
-          }
-        }
-      }
-    },
-    "下载状态" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Download Status"
-          }
-        }
-      }
-    },
     "请选择一个分类" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -124,6 +149,20 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Please select a category"
+          }
+        }
+      }
+    },
+    "输入下载链接 (HTTP/HTTPS/Magnet)" : {
+
+    },
+    "退出" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quit"
           }
         }
       }

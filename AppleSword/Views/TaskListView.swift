@@ -6,9 +6,24 @@ struct TaskListView: View {
     @Binding var isShowingAddTask: Bool
     @EnvironmentObject var taskStore: TaskStore
 
+    var filteredTasks: [DownloadTask] {
+        switch status {
+        case "downloading":
+            return taskStore.tasks.filter { $0.status == .active }
+        case "waiting":
+            return taskStore.tasks.filter { $0.status == .waiting }
+        case "stopped":
+            return taskStore.tasks.filter { $0.status == .paused }
+        case "completed":
+            return taskStore.tasks.filter { $0.status == .complete || $0.status == .error }
+        default:
+            return taskStore.tasks
+        }
+    }
+
     var body: some View {
         Group {
-            if taskStore.tasks.isEmpty {
+            if filteredTasks.isEmpty {
                 ContentUnavailableView(
                     "暂无任务",
                     systemImage: "tray",
@@ -16,7 +31,7 @@ struct TaskListView: View {
                 )
             } else {
                 List(selection: $selectedTaskGids) {
-                    ForEach(taskStore.tasks) { task in
+                    ForEach(filteredTasks) { task in
                         TaskRow(task: task)
                             .tag(task.gid)
                             .contextMenu {
@@ -55,18 +70,19 @@ struct TaskListView: View {
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
                 Button(action: {
-                    if selectedTaskGids.count == taskStore.tasks.count && !taskStore.tasks.isEmpty {
-                        selectedTaskGids.removeAll()
+                    let filteredGids = Set(filteredTasks.map { $0.gid })
+                    if selectedTaskGids.isSuperset(of: filteredGids) && !filteredGids.isEmpty {
+                         selectedTaskGids.subtract(filteredGids)
                     } else {
-                        selectedTaskGids = Set(taskStore.tasks.map { $0.gid })
+                         selectedTaskGids.formUnion(filteredGids)
                     }
                 }) {
+                    let filteredGids = Set(filteredTasks.map { $0.gid })
+                    let isAllSelected = selectedTaskGids.isSuperset(of: filteredGids) && !filteredGids.isEmpty
+                    
                     Label(
-                        selectedTaskGids.count == taskStore.tasks.count && !taskStore.tasks.isEmpty
-                            ? "取消全选" : "全选",
-                        systemImage: selectedTaskGids.count == taskStore.tasks.count
-                            && !taskStore.tasks.isEmpty
-                            ? "checkmark.square.fill" : "checkmark.square"
+                        isAllSelected ? "取消全选" : "全选",
+                        systemImage: isAllSelected ? "checkmark.square.fill" : "checkmark.square"
                     )
                 }
                 .help("全选 / 取消全选")
@@ -119,7 +135,7 @@ struct TaskRow: View {
         HStack {
             Image(systemName: task.bittorrent != nil ? "arrow.down.doc.fill" : "link.circle.fill")
                 .font(.title2)
-                .foregroundColor(.accentColor)
+                .foregroundColor(statusColor)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(
@@ -143,6 +159,17 @@ struct TaskRow: View {
             }
         }
         .padding(.vertical, 4)
+    }
+
+    private var statusColor: Color {
+        switch task.status {
+        case .active: return .accentColor
+        case .waiting: return .orange
+        case .paused: return .gray
+        case .complete: return .green
+        case .error: return .red
+        case .removed: return .secondary
+        }
     }
 
     private func formatBytes(_ bytes: Int64) -> String {

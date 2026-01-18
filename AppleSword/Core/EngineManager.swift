@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 class EngineManager {
     static let shared = EngineManager()
     private var process: Process?
@@ -133,7 +134,8 @@ class EngineManager {
             print(msg)
             
             // Check if it's still running after a split second
-            DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
+            Task {
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
                 if process.isRunning {
                     print("[Engine] Process is still running smoothly.")
                 } else {
