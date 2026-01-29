@@ -26,6 +26,9 @@ class TaskStore: ObservableObject {
     @Published var lastError: String?
     @Published var lastAddedGid: String?
 
+    // History
+    let historyStore = HistoryStore()
+
     private var aria2: Aria2
     private var timer: AnyCancellable?
     private var connectionAttempts = 0
@@ -50,7 +53,8 @@ class TaskStore: ObservableObject {
     private func requestNotificationPermission() {
         Task {
             do {
-                let granted = try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge])
+                let granted = try await UNUserNotificationCenter.current().requestAuthorization(
+                    options: [.alert, .sound, .badge])
                 if granted {
                     print("[TaskStore] Notification permission granted")
                 }
@@ -138,12 +142,30 @@ class TaskStore: ObservableObject {
                     if settings.notificationEnabled {
                         sendCompletionNotification(for: task)
                     }
+                    // Archive completed task
+                    historyStore.add(task)
                 }
             }
             currentTasksMap[task.gid] = task
         }
 
-        self.tasks = Array(currentTasksMap.values).sorted { $0.gid > $1.gid }
+        // Merge with history (avoiding duplicates from active engine tasks)
+        // If a task is in engine, use engine version. If not, use history version.
+        // But history version is usually "removed" or "complete".
+        // Use a set of GIDs present in engine
+        let engineGids = Set(newTasks.map { $0.gid })
+
+        // Add history tasks that are NOT in engine
+        let historyTasks = historyStore.archivedTasks.filter { !engineGids.contains($0.gid) }
+
+        var finalTasks = Array(currentTasksMap.values)
+        finalTasks.append(contentsOf: historyTasks)
+
+        self.tasks = finalTasks.sorted {
+            // Sort by creation or completion? usually GID is hex, unrelated to time.
+            // Ideally we need a timestamp. For now, rely on GID or just keeping them together.
+            $0.gid > $1.gid
+        }
     }
 
     private func sendCompletionNotification(for task: DownloadTask) {
@@ -188,8 +210,8 @@ class TaskStore: ObservableObject {
     }
 
     func addTorrent(at path: String) {
-        let settings = SettingsStore()
-        addTorrent(at: path, paused: !settings.btAutoStart)
+        // Default to paused=true to allow Preview Dialog to handle confirmation
+        addTorrent(at: path, paused: true)
     }
 
     func addTorrent(at path: String, paused: Bool) {
@@ -257,8 +279,9 @@ class TaskStore: ObservableObject {
         }
     }
 
-    func changeOption(gid: String, options: [String: String], completion: @escaping @Sendable () -> Void = {})
-    {
+    func changeOption(
+        gid: String, options: [String: String], completion: @escaping @Sendable () -> Void = {}
+    ) {
         aria2.call(method: .changeOption, params: [AnyEncodable(gid), AnyEncodable(options)])
             .response { _ in
                 completion()
@@ -267,19 +290,68 @@ class TaskStore: ObservableObject {
 
     func removeTasks(gids: Set<String>) {
         for gid in gids {
-            if let task = tasks.first(where: { $0.gid == gid }) {
-                if task.status == .complete || task.status == .removed || task.status == .error {
-                    // Use removeDownloadResult for finished tasks
-                    aria2.call(method: .removeDownloadResult, params: [AnyEncodable(gid)]).response
-                    { _ in }
-                } else {
-                    // Use remove for active/waiting/paused tasks
-                    aria2.call(method: .remove, params: [AnyEncodable(gid)]).response { _ in }
+            // First attempt to remove the result (for stopped/complete/error tasks)
+            aria2.call(method: .removeDownloadResult, params: [AnyEncodable(gid)]).response {
+                [weak self] response in
+                Task { @MainActor in
+                    switch response.result {
+                    case .success(let data):
+                        // If removeDownloadResult succeeds, check if it returned "OK" or similar success
+                        // If it failed RPC-wise (e.g. task is active), aria2 returns error in JSON
+                        if let data = data,
+                            let rpcResponse = try? JSONDecoder().decode(
+                                Aria2Response<String>.self, from: data),
+                            rpcResponse.result == "OK"
+                        {
+                            print("[TaskStore] Removed download result for \(gid)")
+                            // Archive completed task before removal if needed, but usually mergeTasks handles it.
+                            // If we want to support "Delete to Trash" vs "Remove from List", we need to clarify logic.
+                            // Current logic: Delete = Remove everywhere.
+                            // So we should REMOVE from history too.
+                            self?.historyStore.remove(gid: gid)
+                            return
+                        }
+
+                        // If we are here, either decode failed or it wasn't a simple OK string (though usually it is).
+                        // Or more likely, it's an error response.
+                        if let data = data,
+                            let errorResponse = try? JSONDecoder().decode(
+                                Aria2Response<AnyCodable>.self, from: data),
+                            errorResponse.error != nil
+                        {
+                            // Error means probable active task -> Force Remove + Retry
+                            self?.forceRemoveAndClean(gid: gid)
+                        } else {
+                            // Success case that wasn't caught above
+                            print("[TaskStore] Removed download result for \(gid)")
+                            self?.historyStore.remove(gid: gid)
+                        }
+
+                    case .failure:
+                        // Network error or otherwise
+                        self?.forceRemoveAndClean(gid: gid)
+                    }
                 }
             }
         }
-        // Force local removal immediately to prevent re-appearance during poll delay
+        // Force local removal immediately
+        // Force local removal immediately
+        gids.forEach { historyStore.remove(gid: $0) }
         tasks.removeAll(where: { gids.contains($0.gid) })
+    }
+
+    private func forceRemoveAndClean(gid: String) {
+        // Force remove first
+        aria2.call(method: .forceRemove, params: [AnyEncodable(gid)]).response { [weak self] _ in
+            print("[TaskStore] Force removed \(gid), scheduling cleanup")
+            // Schedule a cleanup of the result after a short delay to allow state transition
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self?.aria2.call(method: .removeDownloadResult, params: [AnyEncodable(gid)])
+                    .response { _ in
+                        print("[TaskStore] Cleanup attempt for \(gid) completed")
+                    }
+            }
+        }
     }
 
     func stopTasks(gids: Set<String>) {

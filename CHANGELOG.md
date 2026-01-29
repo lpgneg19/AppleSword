@@ -2,13 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7] - 2026-01-29
+
+### Added
+- **Download History**: Implemented local history persistence (`HistoryStore`). Completed or removed tasks are now archived and can be viewed even after restarting the app.
+- **Torrent Preview**: Enhanced the torrent confirmation dialog with a file list preview. Users can now:
+    - View individual file sizes.
+    - Select/Deselect all files.
+    - Choose specific files to download.
+- **Task Categories**: Added "All Tasks" and "Paused" categories to the sidebar for better task management.
+- **Clipboard Detection**: The "Add Task" view now automatically detects and populates magnet links or HTTP/HTTPS URLs from the clipboard.
+
+### Changed
+- **UI Improvements**: Updated task status colors to be more intuitive:
+    - 🔵 Blue: Downloading
+    - ⚪️ Gray: Paused
+    - 🔴 Red: Error/Stopped
+    - 🟢 Green: Completed
+- **Task Deletion**: Improved task removal logic to ensure "zombie" tasks are completely removed from both the engine and the UI.
+- **File Association**: Added support for opening `.torrent` files and handling `magnet:` links directly within the app.
+
 ## [0.6] - 2026-01-18
 
 ### Fixed
-- **启动崩溃**: 修复了由于通知权限申请回调在非主线程执行导致的 Main Actor 隔离冲突崩溃。
+- **Startup Crash**: Fixed a crash caused by notification permission request callback being executed on a background thread, violating Main Actor isolation.
 
 ### Changed
-- **版本更新**: 升级版本号至 0.6。
+- **Version Update**: Bumped version to 0.6.
 
 ## [0.1] - 2026-01-15
 

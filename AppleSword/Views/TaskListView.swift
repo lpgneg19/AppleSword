@@ -8,14 +8,24 @@ struct TaskListView: View {
 
     var filteredTasks: [DownloadTask] {
         switch status {
+        case "all":
+            return taskStore.tasks
         case "downloading":
             return taskStore.tasks.filter { $0.status == .active }
         case "waiting":
             return taskStore.tasks.filter { $0.status == .waiting }
-        case "stopped":
+        case "paused":
             return taskStore.tasks.filter { $0.status == .paused }
+        case "stopped":
+            // "Stopped" usually means error or manually stopped (paused), but given we have a "Paused" category,
+            // and Aria2 "stopped" (complete/error) vs "paused".
+            // Let's make "Stopped" cover Error and Removed, or perhaps just Error if complete is separate.
+            // Following original logic: Stopped was Paused.
+            // User Request: Paused vs Stopped.
+            // Let's define: Paused = Paused. Stopped = Error.
+            return taskStore.tasks.filter { $0.status == .error }
         case "completed":
-            return taskStore.tasks.filter { $0.status == .complete || $0.status == .error }
+            return taskStore.tasks.filter { $0.status == .complete }
         default:
             return taskStore.tasks
         }
@@ -72,14 +82,15 @@ struct TaskListView: View {
                 Button(action: {
                     let filteredGids = Set(filteredTasks.map { $0.gid })
                     if selectedTaskGids.isSuperset(of: filteredGids) && !filteredGids.isEmpty {
-                         selectedTaskGids.subtract(filteredGids)
+                        selectedTaskGids.subtract(filteredGids)
                     } else {
-                         selectedTaskGids.formUnion(filteredGids)
+                        selectedTaskGids.formUnion(filteredGids)
                     }
                 }) {
                     let filteredGids = Set(filteredTasks.map { $0.gid })
-                    let isAllSelected = selectedTaskGids.isSuperset(of: filteredGids) && !filteredGids.isEmpty
-                    
+                    let isAllSelected =
+                        selectedTaskGids.isSuperset(of: filteredGids) && !filteredGids.isEmpty
+
                     Label(
                         isAllSelected ? "取消全选" : "全选",
                         systemImage: isAllSelected ? "checkmark.square.fill" : "checkmark.square"
@@ -148,6 +159,7 @@ struct TaskRow: View {
 
                 ProgressView(value: Double(task.completedLength), total: Double(task.totalLength))
                     .progressViewStyle(.linear)
+                    .tint(statusColor)
 
                 HStack {
                     Text(formatBytes(task.completedLength) + " / " + formatBytes(task.totalLength))
@@ -163,11 +175,11 @@ struct TaskRow: View {
 
     private var statusColor: Color {
         switch task.status {
-        case .active: return .accentColor
-        case .waiting: return .orange
-        case .paused: return .gray
-        case .complete: return .green
-        case .error: return .red
+        case .active: return .accentColor  // Downloading: Blue (System Accent)
+        case .waiting: return .orange  // Waiting: Orange
+        case .paused: return .gray  // Paused: Gray
+        case .complete: return .green  // Component: Green
+        case .error: return .red  // Error/Stopped: Red
         case .removed: return .secondary
         }
     }

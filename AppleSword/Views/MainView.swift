@@ -12,11 +12,17 @@ struct MainView: View {
         NavigationSplitView {
             List(selection: $selection) {
                 Section(LocalizedStringKey("下载状态")) {
+                    NavigationLink(value: "all") {
+                        Label(LocalizedStringKey("所有任务"), systemImage: "tray.2")
+                    }
                     NavigationLink(value: "downloading") {
                         Label(LocalizedStringKey("正在下载"), systemImage: "arrow.down.circle")
                     }
                     NavigationLink(value: "waiting") {
                         Label(LocalizedStringKey("等待下载"), systemImage: "clock")
+                    }
+                    NavigationLink(value: "paused") {
+                        Label(LocalizedStringKey("已暂停"), systemImage: "pause.circle")
                     }
                     NavigationLink(value: "stopped") {
                         Label(LocalizedStringKey("已停止"), systemImage: "stop.circle")
@@ -36,7 +42,8 @@ struct MainView: View {
                         isShowingAddTask: $isShowingAddTask
                     )
                 } else {
-                    ContentUnavailableView(LocalizedStringKey("请选择一个分类"), systemImage: "sidebar.left")
+                    ContentUnavailableView(
+                        LocalizedStringKey("请选择一个分类"), systemImage: "sidebar.left")
                 }
 
                 // Bottom-up Task Details Popup
@@ -71,8 +78,15 @@ struct MainView: View {
             )
         ) { item in
             if let task = taskStore.tasks.first(where: { $0.gid == item.id }) {
-                TorrentConfirmView(task: task) { path in
-                    taskStore.resumeTask(gid: item.id, options: ["dir": path])
+                TorrentConfirmView(task: task) { path, selectedIndices in
+                    var options = ["dir": path]
+                    if !selectedIndices.isEmpty {
+                        // Sort numerically: "1", "2", "10" -> 1, 2, 10
+                        let sortedIndices = selectedIndices.compactMap { Int($0) }.sorted()
+                        let indexString = sortedIndices.map { String($0) }.joined(separator: ",")
+                        options["select-file"] = indexString
+                    }
+                    taskStore.resumeTask(gid: item.id, options: options)
                     confirmGid = nil
                 } onCancel: {
                     taskStore.removeTasks(gids: [item.id])
@@ -95,7 +109,7 @@ struct MainView: View {
                 let isTorrent = task?.bittorrent != nil
 
                 withAnimation(.spring()) {
-                    if isTorrent && task?.status == .waiting {
+                    if isTorrent && task?.status == .paused {
                         confirmGid = gid
                     } else {
                         selectedTaskGids = [gid]

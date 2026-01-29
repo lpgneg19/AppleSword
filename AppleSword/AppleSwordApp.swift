@@ -39,10 +39,16 @@ struct AppleSwordApp: App {
         let urlString = url.absoluteString
         var downloadURL: String = ""
 
+        if url.isFileURL && url.pathExtension.lowercased() == "torrent" {
+            taskStore.addTorrent(at: url.path)
+            return
+        }
+
         if urlString.hasPrefix("applesword://") {
             downloadURL = urlString.replacingOccurrences(of: "applesword://", with: "")
             if let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-               let queryItem = components.queryItems?.first(where: { $0.name == "url" }) {
+                let queryItem = components.queryItems?.first(where: { $0.name == "url" })
+            {
                 downloadURL = queryItem.value ?? downloadURL
             }
         } else if urlString.hasPrefix("magnet:") || urlString.hasPrefix("thunder:") {

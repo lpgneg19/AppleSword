@@ -77,6 +77,16 @@ struct AddTaskView: View {
         .padding()
         .frame(width: 480)
         .onAppear {
+            // Check clipboard
+            if let clipboardString = NSPasteboard.general.string(forType: .string) {
+                let trimmed = clipboardString.trimmingCharacters(in: .whitespacesAndNewlines)
+                if trimmed.hasPrefix("magnet:") || trimmed.hasPrefix("http://")
+                    || trimmed.hasPrefix("https://") || trimmed.hasPrefix("thunder://")
+                {
+                    urls = trimmed
+                }
+            }
+
             // Using a slightly longer delay and ensuring focused value is set
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 isFieldFocused = true

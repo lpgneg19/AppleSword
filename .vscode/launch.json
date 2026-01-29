@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:AppleSword}",
+            "name": "Debug AppleSword",
+            "program": "${workspaceFolder:AppleSword}/.build/debug/AppleSword",
+            "preLaunchTask": "swift: Build Debug AppleSword"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:AppleSword}",
+            "name": "Release AppleSword",
+            "program": "${workspaceFolder:AppleSword}/.build/release/AppleSword",
+            "preLaunchTask": "swift: Build Release AppleSword"
+        }
+    ]
+}
