@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.8.1] - 2026-01-29
+## [0.8.1.14] - 2026-01-29
 
 ### Fixed
 - **Liquid Glass Design**: Refined the settings interface with proper corner radius and transparency to match Liquid Glass standards.
